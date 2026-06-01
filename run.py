@@ -14,12 +14,9 @@ if __name__ == "__main__":
     port = int(os.getenv("APP_PORT", 8000))
     debug = app_env == "development"
 
-   # run.py
-if app_env == "production":
-    print("Starting production server with gunicorn...")
-    os.system("gunicorn -c gunicorn_config.py main:app")
-
-    
+    if app_env == "production":
+        print("Starting production server with gunicorn...")
+        os.system("gunicorn -c gunicorn_config.py main:app")
     else:
         print(f"Starting development server on {host}:{port}")
         uvicorn.run(
