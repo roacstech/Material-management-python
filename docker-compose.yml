@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: material-management-api
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=production
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8000
+      - DEV_DB_USER=${DEV_DB_USER}
+      - DEV_DB_PASS=${DEV_DB_PASS}
+      - DEV_DB_HOST=mysql
+      - DEV_DB_PORT=3306
+      - DEV_DB_NAME=${DEV_DB_NAME}
+      - WORKERS=4
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+    restart: unless-stopped
+    volumes:
+      - ./logs:/app/logs
+
+  mysql:
+    image: mysql:8.0
+    container_name: material-management-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DEV_DB_PASS}
+      - MYSQL_DATABASE=${DEV_DB_NAME}
+      - MYSQL_USER=${DEV_DB_USER}
+      - MYSQL_PASSWORD=${DEV_DB_PASS}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
