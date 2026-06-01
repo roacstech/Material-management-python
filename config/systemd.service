@@ -1,0 +1,17 @@
+[Unit]
+Description=Material Management API
+After=network.target
+
+[Service]
+Type=notify
+User=www-data
+WorkingDirectory=/opt/material-management-api
+ExecStart=/opt/material-management-api/venv/bin/gunicorn -c gunicorn_config.py app.main:app
+Restart=on-failure
+RestartSec=10
+StandardOutput=append:/var/log/material-management-api/app.log
+StandardError=append:/var/log/material-management-api/error.log
+EnvironmentFile=/opt/material-management-api/.env
+
+[Install]
+WantedBy=multi-user.target

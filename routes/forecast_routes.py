@@ -4,8 +4,8 @@ from datetime import date
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 
-from app.database import SessionLocal
-from app.services.forecast_service import ForecastService
+from database import SessionLocal
+from services.forecast_service import ForecastService
 
 router = APIRouter()
 

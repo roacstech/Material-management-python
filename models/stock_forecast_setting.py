@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, Numeric, Boolean
-from app.database import Base
+from database import Base
 
 class StockForecastSetting(Base):
     __tablename__ = "stock_forecast_settings"

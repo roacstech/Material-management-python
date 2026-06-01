@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes.forecast_routes import router as forecast_router
+from routes.forecast_routes import router as forecast_router
 
 app = FastAPI(
     title="Restaurant ERP Forecast API"
