@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: material-management-api
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - APP_ENV=production
       - APP_HOST=0.0.0.0
@@ -37,7 +37,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - app-network
     restart: unless-stopped
