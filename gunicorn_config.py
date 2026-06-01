@@ -12,11 +12,10 @@ worker_connections = 1000
 timeout = 60
 keepalive = 2
 
-# Logging
-accesslog = 'logs/access.log'
-errorlog = 'logs/error.log'
+# Logging — use stdout/stderr instead of files (Docker captures these)
+accesslog = '-'
+errorlog = '-'
 loglevel = 'info'
-access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"'
 
 # Process naming
 proc_name = 'material-management-api'
